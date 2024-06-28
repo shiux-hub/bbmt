@@ -19,7 +19,7 @@ const breadcrumbs = ref(props.breadcrumbs || [])
           <Bookmark v-if="node.children.length <= 1" :breadcrumbs="[...breadcrumbs, node.title]" :childe="node.children" />
           <Bookmark v-else :childe="node.children" />
         </div>
-        <div class="collapse-title text-xl font-medium">
+        <div class="collapse-title flex items-center gap-2 text-xl font-medium">
           <template v-if="breadcrumbs.length > 0">
             <div class="breadcrumbs">
               <ul>
