@@ -27,10 +27,18 @@ const tree = await chrome.bookmarks.getTree()
       </div>
       <div class="flex items-center gap-1">
         VIEW/HIDE
-        <CheckButton><div class="size-5 rounded-full border-2 border-primary" /></CheckButton>
-        <CheckButton><IconCheck class="size-5 text-green-400" /></CheckButton>
-        <CheckButton><IconClock class="size-5 text-gray-400" /></CheckButton>
-        <CheckButton><IconPlus class="size-5 rotate-45 text-red-400" /></CheckButton>
+        <CheckButton tooltip="Uncheck">
+          <div class="size-5 rounded-full border-2 border-primary" />
+        </CheckButton>
+        <CheckButton tooltip="Success">
+          <IconCheck class="size-5 text-green-400" />
+        </CheckButton>
+        <CheckButton tooltip="Timeout">
+          <IconClock class="size-5 text-gray-400" />
+        </CheckButton>
+        <CheckButton tooltip="Error">
+          <IconPlus class="size-5 rotate-45 text-red-400" />
+        </CheckButton>
       </div>
       <div class="flex w-64 items-center gap-2">
         <input v-model="timeout" class="range" max="60" min="1" type="range">

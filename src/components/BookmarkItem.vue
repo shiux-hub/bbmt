@@ -15,7 +15,6 @@ defineProps<{
 }>()
 
 const status = ref(RequestStatus.Pending)
-
 const source = ref<CancelTokenSource>()
 
 async function handleClick(url: string, config: AxiosRequestConfig) {

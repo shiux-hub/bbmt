@@ -3,6 +3,7 @@ import type { Config } from 'tailwindcss'
 
 export default {
   mode: 'jit',
+  darkMode: 'media',
   content: ['./src/**/*.{vue,ts}'],
   theme: {
     extend: {}

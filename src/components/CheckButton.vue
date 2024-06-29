@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 
 const props = withDefaults(defineProps<{
+  tooltip: string
   checked?: boolean
 }>(), {
   checked: true
@@ -18,7 +19,7 @@ function checking() {
 </script>
 
 <template>
-  <div class="inline-flex cursor-pointer items-center rounded-full" :class="{ 'opacity-50': !checked }" @click="checking">
+  <div class="tooltip inline-flex cursor-pointer items-center rounded-full" :class="{ 'opacity-50': !checked }" :data-tip="tooltip" @click="checking">
     <slot />
   </div>
 </template>
