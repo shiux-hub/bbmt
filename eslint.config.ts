@@ -85,9 +85,6 @@ export default antfu(
           script: {
             lang: 'ts'
           },
-          style: {
-            lang: 'scss'
-          },
           route: {
             lang: 'yaml'
           }

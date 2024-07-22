@@ -1,21 +1,35 @@
 <script lang="ts" setup>
 import '~style.css'
-import Check from './pages/Check.vue'
+import type { App } from 'vue'
+import router from './router'
 import packageJson from '~../package.json'
 import SuspenseContent from '~components/SuspenseContent.vue'
-import IconBookmark from '~components/icon/IconBookmark.vue'
+
+defineOptions({
+  prepare(app: App) {
+    // Use any plugins here:
+    // app.use
+    app.use(router)
+  }
+})
 </script>
 
 <template>
   <div class="drawer bg-base-100 lg:drawer-open">
     <input id="drawer" class="drawer-toggle" type="checkbox">
     <div class="drawer-content">
-      <Suspense timeout="0">
-        <Check />
-        <template #fallback>
-          <SuspenseContent />
+      <RouterView v-slot="{ Component }">
+        <template v-if="Component">
+          <KeepAlive>
+            <Suspense timeout="0">
+              <component :is="Component" />
+              <template #fallback>
+                <SuspenseContent />
+              </template>
+            </Suspense>
+          </KeepAlive>
         </template>
-      </Suspense>
+      </RouterView>
     </div>
     <div class="drawer-side z-40">
       <label aria-label="Close menu" class="drawer-overlay" htmlFor="drawer" />
@@ -33,19 +47,15 @@ import IconBookmark from '~components/icon/IconBookmark.vue'
         <div class="h-4" />
         <ul class="menu px-4 py-0">
           <li>
-            <a>
-              <svg
-                class="size-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" stroke-width="2" strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-              Home
-            </a>
-            <a><IconBookmark class="size-5" /> Check</a>
+            <RouterLink
+              v-for="route in $router.options.routes" :key="route.path" custom :to="route.path"
+              v-slot="{ isActive, href, navigate }"
+            >
+              <a :class="isActive ? 'active' : ''" :href="href" @click="navigate">
+                <component :is="route.meta.icon" class="size-5" />
+                {{ route.meta.title }}
+              </a>
+            </RouterLink>
           </li>
         </ul>
       </aside>
