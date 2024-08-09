@@ -80,7 +80,8 @@ watch(onlyDuplicate, (val) => {
                 </div>
               </td>
               <td>
-                <div class="w-72 overflow-hidden text-ellipsis text-nowrap" @click="switchToTab(tab.id)">
+                <div class="flex w-72 items-center gap-1 overflow-hidden text-ellipsis text-nowrap">
+                  <img class="size-4" :src="tab.favIconUrl">
                   {{ tab.title }}
                 </div>
               </td>
