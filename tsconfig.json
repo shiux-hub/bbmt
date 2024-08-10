@@ -1,13 +1,13 @@
 {
-  "extends": "plasmo/templates/tsconfig.base.json",
+  "extends": "plasmo/templates/tsconfig.base",
   "compilerOptions": {
     "baseUrl": ".",
     "moduleResolution": "bundler",
     "paths": {
       "~*": ["./src/*"]
     },
-    "types": ["vue", "chrome"]
+    "types": ["chrome"]
   },
-  "include": [".plasmo/index.d.ts", "./**/*.ts", "./**/*.vue"],
+  "include": [".plasmo/index.d.ts", "./**/*.ts", "./**/*.tsx"],
   "exclude": ["node_modules"]
 }

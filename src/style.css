@@ -1,9 +1,20 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
+@layer tailwind-base, semi, components, utils;
+@layer tailwind-base {
+  @tailwind base;
+}
+@layer tailwind-components {
+  @tailwind components;
+}
+@layer tailwind-utils {
+  @tailwind utilities;
+}
 @layer base {
-  body {
-    font-size: 100%;
+  a {
+    color: var(--semi-color-link);
+  }
+
+  a:hover {
+    color: var(--semi-color-link-hover);
+    text-decoration: underline;
   }
 }

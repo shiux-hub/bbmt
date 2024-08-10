@@ -10,91 +10,17 @@ export default antfu(
       '*.d.ts',
       '**/*.d.ts'
     ],
-    vue: true,
+    react: true,
     typescript: true
   },
   {
     rules: {
-      'style/comma-dangle': ['error', 'never'],
-      'vue/comma-dangle': ['error', 'never'],
-      // Vue组件排序
-      'vue/order-in-components': [
-        'warn',
-        {
-          order: [
-            'el',
-            'name',
-            'key',
-            'parent',
-            'functional',
-            ['delimiters', 'comments'],
-            ['components', 'directives', 'filters'],
-            'extends',
-            'mixins',
-            ['provide', 'inject'],
-            'ROUTER_GUARDS',
-            'layout',
-            'middleware',
-            'validate',
-            'scrollToTop',
-            'transition',
-            'loading',
-            'inheritAttrs',
-            'model',
-            ['props', 'propsData'],
-            'emits',
-            'setup',
-            'fetch',
-            'asyncData',
-            'data',
-            'head',
-            'computed',
-            'watch',
-            'watchQuery',
-            'LIFECYCLE_HOOKS',
-            'methods',
-            ['template', 'render'],
-            'renderError'
-          ]
-        }
-      ],
-      // Vue属性排序
-      'vue/attributes-order': [
-        'warn',
-        {
-          order: [
-            'DEFINITION',
-            'LIST_RENDERING',
-            'CONDITIONALS',
-            'RENDER_MODIFIERS',
-            'GLOBAL',
-            'UNIQUE',
-            'TWO_WAY_BINDING',
-            'OTHER_DIRECTIVES',
-            'OTHER_ATTR',
-            'EVENTS',
-            'CONTENT'
-          ],
-          alphabetical: true // 字母顺序
-        }
-      ],
-      // Vue组件语言限制
-      'vue/block-lang': [
-        'error',
-        {
-          script: {
-            lang: 'ts'
-          },
-          route: {
-            lang: 'yaml'
-          }
-        }
-      ]
+      'style/comma-dangle': ['error', 'never']
     }
   },
   ...tailwind.configs['flat/recommended'],
   {
-    files: ['**/*.{vue,ts}'],
+    files: ['**/*.{ts,tsx}'],
     settings: {
       tailwindcss: {
         // These are the default values but feel free to customize
