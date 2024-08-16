@@ -1,7 +1,7 @@
 import { Nav } from '@douyinfe/semi-ui'
 import { IconCheckbox, IconIntro, IconToast } from '@douyinfe/semi-icons-lab'
 import { IconSemiLogo } from '@douyinfe/semi-icons'
-import { Outlet, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 function Component() {
   const navigator = useNavigate()
@@ -38,7 +38,6 @@ function Component() {
         onClick={() => navigator('/tabs')}
       />
     </Nav>
-
   )
 }
 
