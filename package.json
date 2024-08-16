@@ -3,7 +3,7 @@
   "displayName": "BBMT",
   "type": "module",
   "version": "0.0.1",
-  "packageManager": "pnpm@9.7.0",
+  "packageManager": "pnpm@9.7.1",
   "description": "Browser bookmark management tool",
   "author": "Dropout",
   "scripts": {
@@ -16,26 +16,26 @@
     "commit": "git-cz"
   },
   "dependencies": {
-    "@douyinfe/semi-icons": "^2.63.1",
-    "@douyinfe/semi-icons-lab": "^2.63.1",
-    "@douyinfe/semi-ui": "^2.63.1",
-    "axios": "^1.7.3",
+    "@douyinfe/semi-icons": "^2.64.0",
+    "@douyinfe/semi-icons-lab": "^2.64.0",
+    "@douyinfe/semi-ui": "^2.64.0",
+    "axios": "^1.7.4",
     "plasmo": "0.88.0",
     "radash": "^12.1.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.26.0"
+    "react-router-dom": "^6.26.1"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^2.25.0",
+    "@antfu/eslint-config": "^2.26.0",
     "@commitlint/cli": "^19.4.0",
     "@commitlint/config-conventional": "^19.2.2",
     "@commitlint/cz-commitlint": "^19.4.0",
     "@commitlint/prompt-cli": "^19.4.0",
     "@commitlint/types": "^19.0.3",
-    "@eslint-react/eslint-plugin": "^1.9.1",
-    "@types/chrome": "0.0.269",
-    "@types/node": "22.1.0",
+    "@eslint-react/eslint-plugin": "^1.10.1",
+    "@types/chrome": "0.0.270",
+    "@types/node": "22.3.0",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "autoprefixer": "^10.4.20",
@@ -46,9 +46,9 @@
     "eslint-plugin-tailwindcss": "^3.17.4",
     "eslint-ts-patch": "9.8.0-1",
     "husky": "^9.1.4",
-    "lint-staged": "^15.2.8",
+    "lint-staged": "^15.2.9",
     "postcss": "^8.4.41",
-    "tailwindcss": "^3.4.9",
+    "tailwindcss": "^3.4.10",
     "typescript": "5.5.4"
   },
   "lint-staged": {
