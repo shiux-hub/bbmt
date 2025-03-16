@@ -1,6 +1,6 @@
-import { Nav } from '@douyinfe/semi-ui'
-import { IconCheckbox, IconIntro, IconToast } from '@douyinfe/semi-icons-lab'
 import { IconSemiLogo } from '@douyinfe/semi-icons'
+import { IconCheckbox, IconIntro, IconToast } from '@douyinfe/semi-icons-lab'
+import { Nav } from '@douyinfe/semi-ui'
 import { useNavigate } from 'react-router-dom'
 
 function Component() {
@@ -13,10 +13,10 @@ function Component() {
       header={{
         logo: (
           <IconSemiLogo className="text-semi-color-text-0" style={{ fontSize: '36px' }} />
-        )
+        ),
       }}
       footer={{
-        collapseButton: true
+        collapseButton: true,
       }}
       className="self-stretch"
     >

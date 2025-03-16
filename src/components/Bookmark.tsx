@@ -1,11 +1,11 @@
+import type { TreeNodeData } from '@douyinfe/semi-ui/lib/es/tree'
+import type { AxiosError, AxiosRequestConfig, CancelTokenSource } from 'axios'
 import { IconClock, IconClose, IconLink, IconLoading } from '@douyinfe/semi-icons'
 import { IconCheckbox } from '@douyinfe/semi-icons-lab'
 import { Badge, Button, Tree, Typography } from '@douyinfe/semi-ui'
-import type { TreeNodeData } from '@douyinfe/semi-ui/lib/es/tree'
-import type { AxiosError, AxiosRequestConfig, CancelTokenSource } from 'axios'
 import axios from 'axios'
-import { useRef, useState } from 'react'
 import { isArray } from 'radash'
+import { useRef, useState } from 'react'
 import { RequestStatus } from '~utils/enums'
 import instance from '~utils/request'
 
@@ -17,17 +17,17 @@ function Bookmark({ tree }: {
 
   function getTreeData(children: chrome.bookmarks.BookmarkTreeNode[]) {
     return children.map((node) => {
-      if (Array.isArray(node.children)) {
+      if (isArray(node.children)) {
         return {
           label: node.title,
           key: node.id,
-          children: getTreeData(node.children)
+          children: getTreeData(node.children),
         }
       }
       return {
         label: node.title,
         value: node.url,
-        key: node.id
+        key: node.id,
       }
     })
   }
@@ -82,7 +82,7 @@ function Bookmark({ tree }: {
   )
 }
 
-function States({ type }: {
+function Status({ type }: {
   type: RequestStatus
 }) {
   switch (type) {
@@ -99,42 +99,45 @@ function States({ type }: {
   }
 }
 
+function useStatus(node: TreeNodeData) {
+  const source = useRef<CancelTokenSource>()
+  const [status, setStatus] = useState(RequestStatus.Pending)
+
+  const config: AxiosRequestConfig = {
+    timeout: 5000,
+    cancelToken: source.current.token,
+  }
+
+  function testUrl() {
+    if (status === RequestStatus.Loading)
+      return source.current.cancel()
+    setStatus(RequestStatus.Loading)
+    const closeToken = axios.CancelToken
+    source.current = closeToken.source()
+    instance.get(node.value as string, config)
+      .then(() => {
+        setStatus(RequestStatus.Succuss)
+      })
+      .catch((error: AxiosError) => {
+        if (error.code === 'ECONNABORTED')
+          setStatus(RequestStatus.Timeout)
+        else if (axios.isCancel(error))
+          setStatus(RequestStatus.Pending)
+        else
+          setStatus(RequestStatus.Error)
+        console.error(error)
+      })
+  }
+  return { status, testUrl }
+}
+
 function Item({ node }: {
   node: TreeNodeData
   // requestStart: boolean
   // checked: boolean
 }) {
-  const [states, setStates] = useState(RequestStatus.Pending)
-  const source = useRef<CancelTokenSource>()
   const { Text } = Typography
-
-  function testURL() {
-    if (states === RequestStatus.Loading)
-      return source.current.cancel()
-
-    setStates(RequestStatus.Loading)
-    const closeToken = axios.CancelToken
-    source.current = closeToken.source()
-
-    const config: AxiosRequestConfig = {
-      timeout: 5000,
-      cancelToken: source.current.token
-    }
-
-    instance.get(node.value as string, config)
-      .then(() => {
-        setStates(RequestStatus.Succuss)
-      })
-      .catch((error: AxiosError) => {
-        if (error.code === 'ECONNABORTED')
-          setStates(RequestStatus.Timeout)
-        else if (axios.isCancel(error))
-          setStates(RequestStatus.Pending)
-        else
-          setStates(RequestStatus.Error)
-        console.error(error)
-      })
-  }
+  const { status, testUrl } = useStatus(node)
 
   // if (requestStart && checked) {
   //   testURL()
@@ -146,9 +149,9 @@ function Item({ node }: {
         size="small"
         onClick={(e) => {
           e.stopPropagation()
-          testURL()
+          testUrl()
         }}
-        icon={<States type={states} />}
+        icon={<Status type={status} />}
       />
       <div>{node.label}</div>
       <Text link={{ href: node.value as string, target: '_blank' }} className="font-mono" icon={<IconLink />} underline>{node.value}</Text>

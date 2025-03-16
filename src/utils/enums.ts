@@ -3,5 +3,5 @@ export enum RequestStatus {
   Loading,
   Error,
   Succuss,
-  Timeout
+  Timeout,
 }

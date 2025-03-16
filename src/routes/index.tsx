@@ -1,5 +1,5 @@
+import { lazy, Suspense } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
-import { Suspense, lazy } from 'react'
 
 const LazyTabs = lazy(() => import('~views/tabs'))
 const LazyCheck = lazy(() => import('~views/check'))
